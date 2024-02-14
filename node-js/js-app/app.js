@@ -1,24 +1,29 @@
-const express = require('express');
+const morgan = require('morgan');
 
+const express = require('express');
 const app = express();
 
 app.set('view engine' , 'ejs');
-
 app.listen(3000);
+app.use(express.static('public'))
+app.use(morgan('dev'));
 
 app.get('/' , (req , res) => {
-    res.render('index' , {'title' : 'Home'});
-});
+    let contents = [
+        {
+            'title' : 'Home',
+            'message' : 'This is Home'
+        },
+        {
+            'title' : 'About',
+            'message' : 'This is About'
+        }
+    ];
 
-app.get('/about' , (req , res) => {
-    res.render('about' , {'title' : 'About'});
-});
+    let data = {
+        'title' : 'Home',
+        contents
+    };
 
-app.get('/about/us' , (req , res) => {
-    res.redirect('/about');
-});
-
-app.use((req , res) => {
-    res.status(404).render('404' , {'title' : '404 Page not found'});
-    // res.statusCode(404);
+    res.render('index' , data);
 });

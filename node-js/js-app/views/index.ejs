@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+<%- include('./partials/nav.ejs') %>
+
+        <h1>Home</h1>
+        
+        <main>
+<% contents.forEach(content => { %>
+        <p>Title: <%= content.title %></p>
+        <p>Message: <%= content.message %></p>
+<% }); %>
+        </main>
+    </body>
 </html>
